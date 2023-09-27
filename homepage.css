@@ -1,0 +1,629 @@
+:root{
+    --gold: #C28E0E;
+}
+
+*{
+    font-family: 'Poppins';
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    outline: none;
+    border: none;
+    text-transform: capitalize;
+    transition: all .2s linear;
+
+
+}
+
+*::selection{
+    background: var(--gold);
+    color: #333;
+}
+
+html{
+    font-size: 62.5%;
+    overflow-x: hidden;
+}
+
+html::-webkit-scrollbar{
+    width: 1.4rem;
+}
+
+html::-webkit-scrollbar-track{
+    background: #222;
+}
+
+html::-webkit-scrollbar-thumb{
+    background: var(--gold);
+}
+
+body{
+    background: black;
+    overflow-x: hidden;
+    padding-left: 35rem;
+
+}
+
+.btn{
+    padding: .7rem 3rem;
+    background: #484848;
+    color: white;
+    cursor: pointer;
+    margin-top: 1rem;
+    font-size: 2rem;
+    border-radius: 5rem;
+}
+
+.btn i{
+    padding: 0.5rem;
+    font-size: 1.8rem;
+}
+
+.btn:hover{
+    background: var(--gold);
+}
+
+header{
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    height: 100%;
+    width: 35rem;
+    background: #484848;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: column;
+    text-align: center;
+}
+
+header .user img{
+    height: 25rem;
+    width: 25rem;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 1rem;
+    border: .3rem solid #9D968D;
+}
+
+header .user .name{
+    font-size: 3.5rem;
+    color: white;
+}
+
+header .user .job{
+    font-size: 2rem;
+    font-style: italic;
+    color: white;
+}
+
+header .navbar{
+    width: 100%;
+}
+
+header .navbar ul{
+    list-style: none;
+    padding: 1rem 3rem;
+}
+
+header .navbar ul li a {
+    display: block;
+    padding: 1rem;
+    margin: 1.5rem 0;
+    font-size: 2rem;
+    border-radius: 5rem;
+    color: black;
+    background: #9D968D;
+}
+
+header .navbar ul li a:hover{
+    background: var(--gold);
+}
+
+#menu{
+    position: fixed;
+    top: 2rem;
+    right: 2rem;
+    background: #484848;
+    color: white;
+    cursor: pointer;
+    font-size: 2.5rem;
+    padding: 1rem 1.5rem;
+    z-index: 1000;
+    display: none;
+}
+section{
+    min-height: 100vh;
+    padding: 1rem
+}
+
+.home{
+    margin-top: 12rem;
+    display: flex;
+    justify-content: center;
+    flex-flow: column;
+    padding: 0 15rem;
+}
+
+.home h3{
+    font-size: 5rem;
+    color: white;
+    font-weight: bold;
+}
+
+.home h3 span{
+    text-transform: lowercase;
+    color: goldenrod;
+    font-size: 2.5rem;
+    padding: 1rem;
+}
+
+.home p{
+    font-size: 2rem;
+    color: white;
+}
+
+.home p span{
+    text-transform: lowercase;
+}
+
+.home .image{
+    background: black;
+    justify-content: right;
+    text-align: right;
+    align-items: right;
+    margin-right: -15rem;
+    margin-top: 2rem;
+}
+
+.filter-white{
+    filter: invert(100%) sepia(93%) saturate(0%) hue-rotate(201deg) brightness(106%) contrast(106%);
+    height: 25rem;
+    width: 25rem;
+}
+
+.aboutme .aboutrow .about img{
+    height: 35rem;
+    width: 35rem;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 5rem;
+    border: .3rem solid #484848;
+    margin-top: 2rem;
+}
+
+.aboutme .aboutrow .about{
+    max-width: 40rem;
+    flex: 1 1 48rem;
+    padding: 2rem 1rem;
+    padding-left: 4rem;
+    color: white;
+    font-size: 1.7rem;
+}
+
+.aboutme .aboutrow .about h3{
+    text-transform: lowercase;
+}
+.aboutme .aboutrow .about h3 span{
+    font-style: italic;
+}
+
+
+.aboutme .aboutrow{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 1rem 0;
+}
+
+.aboutme .aboutrow .aboutinfo{
+    padding: 0rem 0rem;
+    padding-left: 7rem;
+    margin-left:-2rem;
+}
+
+.aboutme .aboutrow .aboutinfo h3{
+    font-size: 2rem;
+    color: white;
+    padding: 1rem 0;
+    font-weight: normal;
+    margin-left: 2rem;
+}
+
+.aboutme .aboutrow .aboutinfo h3 span{
+    color: goldenrod;
+
+}
+
+.aboutme .aboutrow .aboutinfo h3 i{
+    font-size: 2rem;
+    padding: 1rem;
+}
+
+.aboutme .aboutrow .aboutinfo a{
+    padding: 13rem;
+}
+
+.aboutheading{
+    text-align: center;
+    margin: 0 6rem;
+    font-size: 4rem;
+    padding: 1rem;
+    border-bottom: .1rem solid white;
+    color: white;
+}
+
+
+.education .box-container{
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 0;
+    padding-left: 3rem;
+    padding-top: 2rem;
+}
+
+.education .box-container .box{
+    width: 50rem;
+    margin: 4rem 1rem;
+    padding-left: 4rem;
+    border-left: .2rem solid white;
+    position: relative;
+}
+
+.education .box-container .box span{
+    font-size: 2.5rem;
+    background: black;
+    color: white;
+    border-radius: 5rem;
+}
+
+.education .box-container .box h3{
+    font-size: 4rem;
+    color: white;
+    padding-top: 2rem;
+    font-style: italic;
+}
+
+.education .box-container .box p{
+    font-size: 3rem;
+    color: white;
+    padding: 1rem 0;
+}
+
+.education .box-container .box i{
+    position: absolute;
+    top:-1.5rem;
+    left: -2.5rem;
+    height: 5rem;
+    width: 5rem;
+    border-radius: 50%;
+    line-height: 5rem;
+    text-align: center;
+    font-size: 2rem;
+    color: white;
+    background: #484848;
+
+}
+
+.trivia .trivia-container{
+    background: #484848;
+    width: 90%;
+    max-width: 80rem;
+    margin: 5rem auto 0;
+    border-radius: 2rem;
+    padding: 5rem;
+}
+
+.trivia .trivia-container .quiz{
+    padding: 3rem;
+}
+
+.abtn{
+    background:#484848;
+    color:goldenrod;
+    width: 100%;
+    border: 0.1rem solid white;
+    padding: 2rem;
+    margin: 1rem 0;
+    text-align: left;
+    border-radius: 1rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+#next-btn{
+    background: goldenrod;
+    font-size: 2rem;
+    color: #373a36;
+    width: 20rem;
+    padding: 1rem;
+    margin: 2rem auto 0;
+    border-radius: 1rem;
+    cursor: pointer;
+    display: none;
+}
+
+.correct{
+    background: green;
+}
+
+.incorrect{
+    background: red;
+}
+
+#next-btn:hover{
+    background: #c28e0e;
+}
+
+.abtn:hover:not([disabled]){
+    background: goldenrod;
+    color: #373a36;
+    border: 0.1rem solid #373a36;
+}
+
+.abtn:disabled{
+    cursor: no-drop;
+}
+
+.trivia .trivia-container .quiz h2{
+    color: white;
+    font-size: 2.5rem;
+}
+
+.trivia .trivia-container .quiz span{
+    padding: 1rem;
+}
+
+.contact .contact-row{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.contact .contact-row .content{
+    flex:1 1 30rem;
+    padding: 4rem;
+    padding-bottom: 0;
+}
+
+.contact .contact-row form{
+    flex: 1 1 45rem;
+    passing: 2rem;
+    margin: 2rem;
+    margin-bottom: 4rem;
+}
+
+.contact .contact-row form .box{
+    padding: 1rem;
+    margin: 1rem 0;
+    background: #3333;
+    color: white;
+    text-transform: none;
+    font-size: 1.7rem;
+    width: 100%
+}
+
+.contact .contact-row form .box::placeholder{
+    text-transform: capitalize;
+}
+
+.contact .contact-row form .message{
+    height: 15rem;
+    resize: none;
+}
+
+.contact .contact-row .content .title{
+    color: white;
+    font-size: 3rem;
+    padding-bottom: 2rem;
+}
+
+.contact .contact-row .content .info h3{
+    display: flex;
+    align-items: center;
+    font-size: 2rem;
+    color: white;
+    padding: 1rem 0;
+    font-weight: normal;
+}
+
+.contact .contact-row .content .info h3 span{
+    text-transform: lowercase;
+}
+
+.contact .contact-row .content .info h3 i{
+    padding-right: 1rem;
+    color: #373a36;
+}
+
+.contact .contact-row .content .social-icons{
+    margin-top: 7rem;
+    align-items: center;
+    text-align: center;
+    font-size: 3.5rem;
+}
+
+.contact .contact-row .content .social-icons i{
+    padding: 2rem 2rem;
+}
+
+.contact .contact-row .content .social-icons a{
+    color: goldenrod;
+}
+
+.contact .contact-row .copyright{
+    margin-top: 3rem;
+    align-items: center;
+    text-align: center;
+    font-size: 1.5rem;
+    color: white;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* responsive media */
+
+@media (max-width:1200px){
+
+    html{
+        font-size: 55%;
+    }
+
+
+    .home{
+        padding: 1rem 4rem;
+    }
+
+}
+
+@media (min-width:1200px){
+    .home .image{
+        display: none;
+    }
+}
+
+@media (max-width:991px){
+
+    header{
+        left: -120%;
+
+    }
+
+    #menu{
+        display: block;
+    }
+
+    header.toggle{
+        left: 0%;
+    }
+
+    body{
+        padding:0;
+    }
+
+    .education .box-container .box{
+        width: 50rem;
+        margin: 4rem 1rem;
+        padding-left: 4rem;
+        border-left: .2rem solid white;
+        position: relative;
+    }
+
+    .education .box-container .box span{
+        font-size: 2rem;
+    }
+
+    .education .box-container .box h3{
+        font-size: 3.5rem;
+    }
+
+    .education .box-container .box p{
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width:768px){
+
+    html{
+        font-size: 50%;
+    }
+
+    .aboutme .aboutrow .aboutinfo a{
+        padding: 2rem;
+    }
+
+    .education .box-container .box{
+        width: 35rem;
+
+    }
+
+    .education .box-container .box span{
+        font-size: 2rem;
+    }
+
+    .education .box-container .box h3{
+        font-size: 5rem;
+    }
+
+    .education .box-container .box p{
+        font-size: 3rem;
+    }
+}
+
+
+@media (max-width:400px){
+
+    header{
+        width: 100vw;
+    }
+
+    .education .box-container .box h3{
+        font-size: 3rem;
+    }
+
+    .education .box-container .box p{
+        font-size: 2rem;
+    }
+
+    .education .box-container .box span{
+        font-size: 1.5rem;
+    }
+
+    .education .box-container .box{
+        width: 20rem;
+    }
+
+    .aboutme .aboutrow .aboutinfo a{
+        padding: 5rem;
+    }
+
+    .aboutme .aboutrow{
+        display: flex;
+        align-items: left;
+        justify-content: left;
+    }
+
+    .aboutme .aboutrow .aboutinfo{
+        padding: 0rem 0rem;
+        padding-left: 4rem;
+    }
+
+    .aboutme .aboutrow .aboutinfo h3{
+        font-size: 2rem;
+        color: white;
+        font-weight: normal;
+        left-padding: -1rem;
+    }
+
+    .aboutme .aboutrow .aboutinfo h3 span{
+        color: goldenrod;
+    }
+
+
+}
