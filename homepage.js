@@ -125,6 +125,7 @@ $(document).ready(function(){
             }
             button.addEventListener('click', selectAnswer);
         });
+        nextButtons.innerHTML = "Play Again";
     }
 
     function resetState(){
@@ -153,15 +154,15 @@ $(document).ready(function(){
         resetState();
         if (score > 8)
         {
-            questionElement.innerHTML = "Excellent! You scored " + score + " out of " + questions.length + " points!";
+            questionElement.innerHTML = "Sensational! You scored " + score + " out of " + questions.length + " points!";
         }
         else if (score >= 5 && score <= 8)
         {
-            questionElement.innerHTML = "Good! You scored " + score + " out of " + questions.length + " points!";
+            questionElement.innerHTML = "Nice! You scored " + score + " out of " + questions.length + " points!";
         }
         else
         {
-            questionElement.innerHTML = "Oops, Bookie! You scored " + score + " out of " + questions.length + " points! You should try again!";
+            questionElement.innerHTML = "Oops, Bookie! You scored " + score + " out of " + questions.length + " points! You should try again and think harder!";
         }
         nextButtons.innerHTML = "Play Again";
         nextButtons.style.display = "block";
