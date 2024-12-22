@@ -106,7 +106,6 @@ $(document).ready(function(){
         currentQuestionIndex = 0;
         score = 0;
         nextButtons.innerHTML = "Next";
-        nextButtons.innerHTML = "Play Again";
         showQuestion();
     }
 
