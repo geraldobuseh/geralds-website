@@ -15,8 +15,8 @@ $(document).ready(function(){
             question: "Gerald is a ...?",
             answers: [
                 { text: "Freshman", choice: false},
-                { text: "Sophomore", choice: true},
-                { text: "Junior", choice: false},
+                { text: "Sophomore", choice: false},
+                { text: "Junior", choice: true},
                 { text: "Senior", choice: false}
             ]
 
@@ -31,12 +31,12 @@ $(document).ready(function(){
             ]
         },
         {
-            question: "What is Gerald biggest fear?",
+            question: "What is Gerald's favorite Football/Soccer club?",
             answers: [
-                { text: "Cats", choice: false},
-                { text: "Height", choice: true},
-                { text: "Dogs", choice: false},
-                { text: "Horror Movies", choice: false}
+                { text: "Manchester United", choice: false},
+                { text: "Manchester City", choice: true},
+                { text: "Real Madrid", choice: false},
+                { text: "Chelsea", choice: false}
             ]
         },
         {
@@ -51,10 +51,10 @@ $(document).ready(function(){
         {
             question: "What is Gerald's favorite food?",
             answers: [
-                { text: "Pasta", choice: true},
+                { text: "Pasta", choice: false},
                 { text: "Rice", choice: false},
-                { text: "Burger", choice: false},
-                { text: "Steak", choice: false}
+                { text: "Burger (with no cheese)", choice: false},
+                { text: "Medium Cooked Steak", choice: true}
             ]
         },
         {
@@ -67,19 +67,19 @@ $(document).ready(function(){
             ]
         },
         {
-            question: "How long has Gerald been programming?",
+            question: "How long has Gerald been PROgramming?",
             answers: [
                 { text: "1 year", choice: false},
                 { text: "2 years", choice: false},
-                { text: "3 years", choice: true},
-                { text: "4 years", choice: false}
+                { text: "3 years", choice: false},
+                { text: "4 years", choice: true}
             ]
 
         },
         {
             question: "What was Gerald's favorite class in high school?",
             answers: [
-                { text: "English language", choice: false},
+                { text: "English Language", choice: false},
                 { text: "Biology", choice: false},
                 { text: "Mathematics", choice: true},
                 { text: "Economics", choice: false}
@@ -90,8 +90,8 @@ $(document).ready(function(){
             answers: [
                 { text: "Wizkid", choice: false},
                 { text: "Lil baby", choice: false},
-                { text: "Odumodublvck", choice: true},
-                { text: "Burna Boy", choice: false}
+                { text: "Odumodublvck", choice: false},
+                { text: "Burna Boy", choice: true}
             ]
         }
     ];
