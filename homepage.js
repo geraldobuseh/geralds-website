@@ -7,7 +7,7 @@ $(document).ready(function(){
             answers: [
                 { text: "Harvard University", choice: false},
                 { text: "Purdue University", choice: false},
-                { text: "Truman State University", choice: true},
+                { text: "Texas State University", choice: true},
                 { text: "University of Lagos", choice: false}
             ]
         },
@@ -16,8 +16,8 @@ $(document).ready(function(){
             answers: [
                 { text: "Freshman", choice: false},
                 { text: "Sophomore", choice: false},
-                { text: "Junior", choice: true},
-                { text: "Senior", choice: false}
+                { text: "Junior", choice: false},
+                { text: "Senior", choice: true}
             ]
 
         },
@@ -67,7 +67,7 @@ $(document).ready(function(){
             ]
         },
         {
-            question: "How long has Gerald been PROgramming?",
+            question: "How long has Gerald been Programming?",
             answers: [
                 { text: "1 year", choice: false},
                 { text: "2 years", choice: false},
