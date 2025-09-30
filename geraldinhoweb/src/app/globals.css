@@ -6,20 +6,26 @@
 
 :root {
   --background: #000000;
-  --foreground: #6CADDF;
+  --foreground: #ffffff;
+  --secondary: #6CADDF;
 }
+
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-secondary: var(--secondary);
+
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
+
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #000000;
-    --foreground: #ededed;
+    --foreground: #ffffff;
+    --secondary: #6CADDF;
   }
 }
 
