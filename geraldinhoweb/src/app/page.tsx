@@ -1,19 +1,69 @@
 "use client";
+import { useState } from "react";
+import { FiMenu, FiX } from "react-icons/fi";
 import Image from "next/image";
 import { useScrollSpy } from "./hooks/useScrollSpy";
-import { FaGithub, FaLinkedin, FaTwitter, FaInstagram } from "react-icons/fa";
 
 export default function Home() {
   // IDs for sections
   const sectionIds = ["home", "about", "education", "experience", "projects", "contact"];
   const activeId = useScrollSpy(sectionIds, 100); // offset = 100px for sticky header
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <div className="tracking-wider font-light mx-auto min-h-screen max-w-screen-xl px-8 py-2 font-sans md:px-12 md:py-16 lg:py-0 relative">
 
       <div className="justify-between border-r border-slate-800 p-6 text-white lg:flex lg:justify-between lg:gap-4">
+
+          {/* Mobile Nav */}
+        <div className="lg:hidden fixed top-0 left-0 w-full bg-black/80 backdrop-blur-md z-50">
+          <nav className="flex justify-between items-center p-4">
+            <h1 className="text-lg font-semibold text-secondary">Gerald.</h1>
+
+            {/* Hamburger button */}
+            <button
+              onClick={() => setIsOpen(true)}
+              className="text-white text-2xl"
+              aria-label="Open menu"
+            >
+              <FiMenu />
+            </button>
+          </nav>
+
+          {/* Fullscreen overlay menu with animation */}
+          {isOpen && (
+            <div
+              className="fixed inset-0 w-full h-screen bg-black/95 z-50 flex flex-col justify-center items-center
+                        animate-fadeIn"
+            >
+              {/* Close button */}
+              <button
+                onClick={() => setIsOpen(false)}
+                className="absolute top-6 right-6 text-white text-3xl"
+                aria-label="Close menu"
+              >
+                <FiX />
+              </button>
+
+              <ul className="flex flex-col gap-10 text-center animate-slideIn">
+                {sectionIds.map((id) => (
+                  <li key={id}>
+                    <a
+                      href={`#${id}`}
+                      onClick={() => setIsOpen(false)} // close after click
+                      className="text-3xl font-light tracking-widest text-white hover:text-secondary transition"
+                    >
+                      {id.charAt(0).toUpperCase() + id.slice(1)}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
+
         
-        <header className="lg:sticky lg:top-0 lg:flex lg:max-h-screen lg:w-[48%] lg:flex-col lg:justify-between lg:py-24">
+        <header className="lg:sticky lg:top-0 pt-15 pb-0 lg:flex lg:max-h-screen lg:w-[48%] lg:flex-col lg:justify-between lg:py-24">
           
           <div> 
             <h1 className="text-4xl font-bold tracking-tight text-slate-200 sm:text-5xl">
@@ -84,7 +134,7 @@ export default function Home() {
                 aria-label="GitHub"
                 title="GitHub"
               >
-                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16" className="h-6 w-6">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16" className="h-7 w-7">
                   <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 
                   5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94
                   -.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 
@@ -111,7 +161,7 @@ export default function Home() {
                 aria-label="LinkedIn"
                 title="LinkedIn"
               >
-                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16" className="h-6 w-6">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16" className="h-7 w-7">
                   <path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"/>
                 </svg>
               </a>
@@ -127,7 +177,7 @@ export default function Home() {
                 aria-label="Instagram"
                 title="Instagram"
               >
-                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" className="h-6 w-6">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" className="h-7 w-7">
                   <path d="M12 2.163c3.204 0 3.584.012 4.85.07 
                   1.366.062 2.633.35 3.608 1.325.975.975 
                   1.262 2.242 1.324 3.608.058 1.266.069 
@@ -169,7 +219,7 @@ export default function Home() {
                   xmlns="http://www.w3.org/2000/svg"
                   fill="currentColor"
                   viewBox="0 0 24 24"
-                  className="h-6 w-6"
+                  className="h-7 w-7"
                   aria-hidden="true"
                 >
                   <path d="M22.675 0H1.325C.593 0 0 .593 0 
@@ -195,7 +245,7 @@ export default function Home() {
                 aria-label="X"
                 title="X (Twitter)"
               >
-                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 1200 1227" className="h-6 w-6">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 1200 1227" className="h-7 w-7">
                   <path d="M714.163 519.284L1160.89 0H1052.9L668.11 
                   450.887 356.178 0H0L468.776 681.821 0 
                   1226.9H108.038L515.354 750.639 843.822 
@@ -210,27 +260,6 @@ export default function Home() {
 
         </header>
     
-
-        {/* Top Nav for mobile */}
-        <header className="lg:hidden fixed top-0 left-0 w-full bg-black/80 backdrop-blur-md z-50">
-          <nav className="max-w-5xl mx-auto flex justify-between items-center p-4">
-            <h1 className="text-xl font-bold text-secondary">Gerald</h1>
-            <ul className="flex gap-4 text-sm">
-              {sectionIds.map((id) => (
-                <li key={id}>
-                  <a
-                    href={`#${id}`}
-                    className={`transition ${
-                      activeId === id ? "text-secondary font-semibold" : "hover:text-secondary"
-                    }`}
-                  >
-                    {id.charAt(0).toUpperCase() + id.slice(1)}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </nav>
-        </header>
 
         {/* Main Content */}
         <main className="lg:ml-[250px] max-w-3xl mx-auto px-6">
