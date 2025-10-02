@@ -18,7 +18,7 @@ export default function Home() {
           {/* Mobile Nav */}
         <div className="lg:hidden fixed top-0 left-0 w-full bg-black/80 backdrop-blur-md z-50">
           <nav className="flex justify-between items-center p-4">
-            <h1 className="text-lg font-semibold text-secondary">Gerald.</h1>
+            <a className="text-lg font-semibold text-secondary" href="#home" >Gerald</a>
 
             {/* Hamburger button */}
             <button
@@ -33,7 +33,7 @@ export default function Home() {
           {/* Fullscreen overlay menu with animation */}
           {isOpen && (
             <div
-              className="fixed inset-0 w-full h-screen bg-black/95 z-50 flex flex-col justify-center items-center
+              className="fixed inset-0 w-full h-screen bg-black/95 z-80 flex flex-col justify-center items-center
                         animate-fadeIn"
             >
               {/* Close button */}
@@ -45,7 +45,7 @@ export default function Home() {
                 <FiX />
               </button>
 
-              <ul className="flex flex-col gap-10 text-center animate-slideIn">
+              <ul className="flex flex-col gap-10 text-center h-3/4 animate-slideIn">
                 {sectionIds.map((id) => (
                   <li key={id}>
                     <a
@@ -58,6 +58,7 @@ export default function Home() {
                   </li>
                 ))}
               </ul>
+              <p className="text-secondary text-base font-extralight tracking-widest mb-2 font-stretch-expanded">Loosely designed by Gerald</p>
             </div>
           )}
         </div>
@@ -262,22 +263,19 @@ export default function Home() {
     
 
         {/* Main Content */}
-        <main className="lg:ml-[250px] max-w-3xl mx-auto px-6">
+        <main className="lg:ml-[250px] max-w-3xl mx-auto">
           {/* Hero Section */}
           <section id="home" className="h-screen flex flex-col justify-center">
-            <p className="text-secondary mb-2 font-mono">Hi, my name is</p>
-            <h1 className="text-5xl font-bold mb-4">Gerald Obuseh.</h1>
-            <h2 className="text-3xl text-gray-400 mb-6">I build things for the web.</h2>
-            <p className="text-gray-400 max-w-xl">
-              I’m a Software Engineer and Computer Science senior at Texas State
-              University. Passionate about building responsive interfaces,
-              intelligent systems, and solving real-world problems with code.
+            <h1 className="text-5xl font-bold mb-4">About <span className="text-secondary">me</span></h1>
+            <h2 className="text-2xl text-gray-500 mb-6">I love building things for the web, yay</h2>
+            <p className="text-gray-200 max-w-xl text-base font-light tracking-widest font-stretch-expanded">
+            Software Engineer, Texas State CS senior. I build intuitive apps, intelligent systems, and ruthless fixes to real problems. If it has pixels or logic, I make it faster, cleaner, and easier to love.
             </p>
             <a
               href="#projects"
-              className="mt-8 inline-block border border-secondary text-secondary px-6 py-3 rounded hover:bg-secondary hover:text-black transition"
+              className="mt-8 inline-block font-semibold border border-secondary text-secondary px-6 py-3 rounded hover:bg-secondary hover:text-black transition"
             >
-              See my work
+              See work
             </a>
           </section>
 
