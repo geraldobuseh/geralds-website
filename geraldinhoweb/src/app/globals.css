@@ -8,6 +8,18 @@
   --background: #000000;
   --foreground: #ffffff;
   --secondary: #6CADDF;
+  --font-family-base: "Inter", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  /* Type scale + rhythm */
+  --text-base: 16px;
+  --leading: 1.55;
+
+  /* Slightly tighter tracking for big headings */
+  --tracking-tight: -0.02em;
+  --tracking-tighter: -0.035em;
+
+  /* A soft max width so paragraphs feel editorial */
+  --reading-width: 68ch;
+
 }
 
 
@@ -16,8 +28,7 @@
   --color-foreground: var(--foreground);
   --color-secondary: var(--secondary);
 
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-family-base);
 }
 
 
@@ -29,18 +40,69 @@
   }
 }
 
+html {
+  scroll-behavior: smooth;
+  font-family: var(--font-family-base);
+  font-size: var(--text-base);
+  text-rendering: geometricPrecision;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-kerning: normal;
+  font-variant-ligatures: common-ligatures contextual;
+  font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: "Inter", sans-serif;
+  font-family: var(--font-family-base);
+  line-height: var(--leading);
+  letter-spacing: -0.005em; 
 }
 
-html {
-  scroll-behavior: smooth;
+/* Headings: crisp + confident */
+h1, h2, h3 {
+  letter-spacing: var(--tracking-tight);
+  text-wrap: balance; /* modern browsers: makes headlines look designed */
 }
+
+h1 {
+  letter-spacing: var(--tracking-tighter);
+  line-height: 1.05;
+}
+
+h2 {
+  line-height: 1.12;
+}
+
+h3 {
+  line-height: 1.18;
+}
+
+/* Paragraphs: editorial feel */
+p {
+  max-width: var(--reading-width);
+  text-wrap: pretty; /* nicer ragged edges in modern browsers */
+}
+
+
+
+/* Code / mono: keep it clean */
+code, pre, kbd, samp {
+  font-variant-ligatures: none;
+}
+
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  * {
+    font-family: var(--font-family-base);
+  }
+}
+
 
 @layer utilities {
   @keyframes fadeIn {
@@ -57,5 +119,38 @@ html {
   }
   .animate-slideIn {
     animation: slideIn 0.4s ease-out forwards;
+  }
+
+  @keyframes sparkDisperse {
+    0% {
+      transform: translate(0, 0) rotate(var(--spark-angle, 0deg)) translateX(0) scaleY(1);
+      opacity: 0.6;
+      filter: brightness(1);
+    }
+    20% {
+      opacity: 0.4;
+      filter: brightness(1.2);
+    }
+    40% {
+      opacity: 0.3;
+      filter: brightness(0.8);
+    }
+    60% {
+      opacity: 0.2;
+      filter: brightness(1.1);
+      transform: translate(0, 0) rotate(var(--spark-angle, 0deg)) translateX(calc(var(--spark-distance, 400px) * 2.0)) scaleY(0.8);
+    }
+    80% {
+      opacity: 0.1;
+      filter: brightness(0.6);
+    }
+    100% {
+      transform: translate(0, 0) rotate(var(--spark-angle, 0deg)) translateX(var(--spark-distance, 300px)) scaleY(0.5);
+      opacity: 0;
+      filter: brightness(0.3);
+    }
+  }
+  .animate-sparkDisperse {
+    animation: sparkDisperse var(--spark-duration, 4s) ease-out var(--spark-delay, 1s) infinite;
   }
 }

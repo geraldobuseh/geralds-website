@@ -1,17 +1,69 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FiMenu, FiX } from "react-icons/fi";
 import Image from "next/image";
 import { useScrollSpy } from "./hooks/useScrollSpy";
+import TriviaQuiz from "./components/TriviaQuiz";
+import SporeEffect from "./components/SporeEffect";
 
 export default function Home() {
   // IDs for sections
-  const sectionIds = ["home", "about", "education", "experience", "projects", "contact"];
+  const sectionIds = ["home", "about", "education", "experience", "projects", "playlist", "trivia", "contact"];
   const activeId = useScrollSpy(sectionIds, 100); // offset = 100px for sticky header
   const [isOpen, setIsOpen] = useState(false);
+  const [displayPosition, setDisplayPosition] = useState({ x: 0, y: 0 });
+
+  useEffect(() => {
+    let animationFrameId: number;
+    let currentX = 0;
+    let currentY = 0;
+    let targetX = 0;
+    let targetY = 0;
+
+    const handleMouseMove = (e: MouseEvent) => {
+      targetX = e.clientX;
+      targetY = e.clientY;
+    };
+
+    const animate = () => {
+      // Smooth interpolation for smoother movement (easing factor of 0.1)
+      currentX += (targetX - currentX) * 0.1;
+      currentY += (targetY - currentY) * 0.1;
+      setDisplayPosition({ x: currentX, y: currentY });
+      animationFrameId = requestAnimationFrame(animate);
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    animate();
+
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      if (animationFrameId) cancelAnimationFrame(animationFrameId);
+    };
+  }, []);
 
   return (
-    <div className="tracking-wider font-light mx-auto min-h-screen max-w-screen-xl px-8 py-2 font-sans md:px-12 md:py-16 lg:py-0 relative">
+    <>
+      {/* Spore effect */}
+      <SporeEffect />
+      
+      {/* Cursor light effect */}
+      <div
+        className="fixed pointer-events-none"
+        style={{
+          left: `${displayPosition.x}px`,
+          top: `${displayPosition.y}px`,
+          transform: "translate(-50%, -50%)",
+          width: "clamp(200px, 30vw, 300px)",
+          height: "clamp(150px, 30vw, 300px)",
+          borderRadius: "50%",
+          background: "radial-gradient(circle, rgba(108, 173, 223, 0.2) 5%, rgba(108, 173, 223, 0.08) 70%, rgba(108, 173, 223, 0.08) 10%, transparent 70%)",
+          opacity: 0.7,
+          zIndex: 1,
+          willChange: "transform",
+        }}
+      />
+    <div className="tracking-wider font-light mx-auto min-h-screen max-w-screen-xl px-8 py-2 md:px-12 md:py-16 lg:py-0 relative">
 
       <div className="justify-between border-r border-slate-800 p-6 text-white lg:flex lg:justify-between lg:gap-4">
 
@@ -68,13 +120,13 @@ export default function Home() {
           
           <div> 
             <h1 className="text-4xl font-bold tracking-tight text-slate-200 sm:text-5xl">
-              <a href="#home" className="hover:text-secondary">Gerald Obuseh</a>
+              <a href="#home" className="hover:text-secondary font-bold tracking-wide max-w-prose ">Gerald Obuseh</a>
             </h1>
-            <h2 className="text-lg font-medium tracking-tight text-slate-200 mt-2">
+            <h2 className="text-lg font-semibold tracking-wide mt-3 opacity-80 leading-loose max-w-prose text-neutral-300">
               Software Engineer
             </h2>
-            <p className="mt-4 max-w-xs leading-normal">
-              I build accessible, performant digital experiences for the web.
+            <p className="text-neutral-300 text-sm font-semibold tracking-[0.28em] mt-3 opacity-80">
+              I design and engineer high-performance systems where clarity, speed, and intent compound.
             </p>
             <nav className="nav hidden lg:block" aria-label="In-page jump links">
               <ul className="mt-16 w-max">
@@ -103,15 +155,15 @@ export default function Home() {
                   </a>
                 </li>
                 <li>
-                <a className="group flex items-center py-3 active" href="#trivia">
-                    <span className="nav-indicator mr-4 h-px w-8 bg-slate-600 transition-all group-hover:w-16 group-hover:bg-slate-200 group-focus-visible:w-16 group-focus-visible:bg-slate-200 motion-reduce:transition-none"></span>
-                    <span className="nav-text text-xs font-bold uppercase tracking-widest text-slate-500 group-hover:text-slate-200 group-focus-visible:text-slate-200">Trivia</span>
-                  </a>
-                </li>
-                <li>
                 <a className="group flex items-center py-3 active" href="#playlist">
                     <span className="nav-indicator mr-4 h-px w-8 bg-slate-600 transition-all group-hover:w-16 group-hover:bg-slate-200 group-focus-visible:w-16 group-focus-visible:bg-slate-200 motion-reduce:transition-none"></span>
                     <span className="nav-text text-xs font-bold uppercase tracking-widest text-slate-500 group-hover:text-slate-200 group-focus-visible:text-slate-200">Playlist</span>
+                  </a>
+                </li>
+                <li>
+                <a className="group flex items-center py-3 active" href="#trivia">
+                    <span className="nav-indicator mr-4 h-px w-8 bg-slate-600 transition-all group-hover:w-16 group-hover:bg-slate-200 group-focus-visible:w-16 group-focus-visible:bg-slate-200 motion-reduce:transition-none"></span>
+                    <span className="nav-text text-xs font-bold uppercase tracking-widest text-slate-500 group-hover:text-slate-200 group-focus-visible:text-slate-200">Trivia</span>
                   </a>
                 </li>
                 <li>
@@ -266,10 +318,10 @@ export default function Home() {
         <main className="lg:ml-[250px] max-w-3xl mx-auto">
           {/* Hero Section */}
           <section id="home" className="h-screen flex flex-col justify-center">
-            <h1 className="text-5xl font-bold mb-4">About <span className="text-secondary">me</span></h1>
-            <h2 className="text-2xl text-gray-500 mb-6">I love building things for the web, yay</h2>
-            <p className="text-gray-200 max-w-xl text-base font-light tracking-widest font-stretch-expanded">
-            Software Engineer, Texas State CS senior. I build intuitive apps, intelligent systems, and ruthless fixes to real problems. If it has pixels or logic, I make it faster, cleaner, and easier to love.
+            <h2 className="text-lg font-semibold tracking-[0.22em] mb-4 opacity-80">A little context: most people know me as <span className="text-secondary">Geraldinho.</span></h2>
+            <h2 className="text-neutral-300 text-md font-semibold tracking-[2.0em] opacity-50">I focus on getting a little better every day.</h2>
+            <p className="text-neutral-300 text-md font-semibold tracking-[0.1em] mt-4 opacity-80">
+            Computer Science and Mathematics at Texas State University. I engineer systems where code, data, and mathematical reasoning intersect. My focus is performance, correctness, and building things that hold up under scale.
             </p>
             <a
               href="#projects"
@@ -281,63 +333,213 @@ export default function Home() {
 
           {/* About */}
           <section id="about" className="py-24">
-            <h2 className="text-3xl font-bold mb-6">About Me</h2>
-            <p className="text-gray-400 mb-4">
-              I’m originally from Delta State, Nigeria, and currently pursuing a
-              B.S. in Computer Science and Mathematics at Texas State University...
-            </p>
-            <Image src="/4.jpg" alt="Gerald Obuseh" width={300} height={300} className="rounded-lg mt-6" />
+            <h2 className="text-3xl font-bold mb-8">About <span className="text-secondary">Me</span></h2>
+            <div className="relative">
+              {/* Mobile: Stack vertically */}
+              <div className="md:hidden mb-6">
+                <Image 
+                  src="/1018.webp" 
+                  alt="Gerald Obuseh" 
+                  width={500} 
+                  height={500} 
+                  className="rounded-lg w-full aspect-square object-cover shadow-lg" 
+                />
+              </div>
+              
+              {/* Desktop: Float left with proper spacing */}
+              <div className="hidden md:block float-left mr-6 mb-4 w-72 h-96 flex-shrink-0">
+                <Image 
+                  src="/1018.webp" 
+                  alt="Gerald Obuseh" 
+                  width={288} 
+                  height={384} 
+                  className="rounded-lg w-full h-full object-cover shadow-lg" 
+                />
+              </div>
+              
+              <div className="text-neutral-300 max-w-3xl text-sm font-semibold tracking-[0.06em] opacity-80">
+                <p className="mb-3">
+                  I'm originally from Delta State, Nigeria, and currently studying Computer Science and Mathematics at Texas State University, 
+                  where I focus on building strong technical foundations with real-world leverage.
+                </p>
+                <p className="mb-3">
+                  My path into technology started with curiosity about how systems behave under pressure and how thoughtful design can make them 
+                  resilient.
+                </p>
+                <p>
+                  Outside of coding, I enjoy playing soccer, a discipline I've practiced since early childhood in Nigeria. Playing has shaped how I think about positioning, timing, and decision-making under pressure. 
+                  I also enjoy competitive, systems-driven games such as EAFC and Mortal Kombat, which reward pattern recognition 
+                  and precise execution.
+                </p>
+              </div>
+              <div className="clear-both"></div>
+            </div>
           </section>
 
           {/* Education */}
           <section id="education" className="py-24">
-            <h2 className="text-3xl font-bold mb-6">Education</h2>
+            <h2 className="text-3xl font-bold mb-6 text-secondary">Education</h2>
             <div className="space-y-6">
               <div>
-                <h3 className="text-xl font-semibold">Texas State University</h3>
-                <p className="text-gray-400">B.Sc. in Computer Science, Minor in Mathematics (Expected 2026)</p>
+                <h3 className="text-xl font-bold text-neutral-300 mb-2">Texas State University, USA</h3>
+                <p className="text-gray-400 text-sm font-semibold">Bachelor of Science in Computer Science </p>
+                <p className="text-gray-400 text-sm font-semibold">Minor in Mathematics (Expected 2026)</p>
               </div>
               <div>
-                <h3 className="text-xl font-semibold">University of Lagos</h3>
-                <p className="text-gray-400">Visiting Undergraduate (2021-2022)</p>
+                <h3 className="text-xl font-bold text-neutral-300 mb-2">University of Lagos, Nigeria</h3>
+                <p className="text-gray-400 text-sm font-semibold">Bachelor of Engineering in Systems Engineering</p>
+                <p className="text-gray-400 text-sm font-semibold">Visiting Undergraduate (2021-2022)</p>
+              </div>
+            </div>
+          </section>
+
+          {/* Experience */}
+          <section id="experience" className="py-24">
+            <h2 className="text-3xl font-bold mb-6 text-secondary">Professional Experience</h2>
+            <div className="space-y-8">
+              <div className="border-l-2 border-secondary pl-6 pb-6">
+                <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-2">
+                  <h3 className="text-xl font-semibold">Software Engineering Intern</h3>
+                  <span className="italic text-sm text-neutral-500 mt-1 md:mt-0">JPMorgan Chase, US Private Bank</span>
+                </div>
+                <p className="text-sm text-neutral-400 mb-2">Summer 2026</p>
+                <p className="text-neutral-400 max-w-xl text-sm font-semibold tracking-[0.12em]">
+                  Incoming Software Engineering Intern for Summer 2026, joining a team where reliability, performance, and precision matter at scale.
+                </p>
+              </div>
+              
+              <div className="border-l-2 border-secondary pl-6 pb-6">
+                <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-2">
+                  <h3 className="text-xl font-semibold tracking-[0.20em]">Engineering Student Assistant</h3>
+                  <span className="italic text-sm text-neutral-500 mt-1 md:mt-0">Bruce and Ingram School of Engineering, Texas State University</span>
+                </div>
+                <p className="text-sm text-neutral-400 mb-2">September 2025 - Present</p>
+                <p className="text-neutral-400 max-w-xl text-sm font-semibold tracking-[0.12em]">
+                Design and automate 3D printer workflows using embedded C++ on Raspberry Pi, cutting manual intervention and improving throughput. 
+                Operate close to hardware, optimized constrained systems, and shipped tooling that actually gets used.
+                </p>
+              </div>
+              
+              <div className="border-l-2 border-secondary pl-6 pb-6">
+                <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-2">
+                  <h3 className="text-xl font-semibold">Software Engineering Intern</h3>
+                  <span className="italic text-sm text-neutral-500 mt-1 md:mt-0">Paystrait, Nigeria</span>
+                </div>
+                <p className="text-sm text-neutral-400 mb-2">May 2025 - August 2025</p>
+                <p className="text-neutral-400 max-w-xl text-sm font-semibold tracking-[0.12em]">
+                Refactored and stabilized the admin dashboard using TypeScript and Node.js, improving how user accounts and transactions are managed.
+                Focused on clarity, maintainability, and building interfaces that don’t break under real usage.
+                </p>
+              </div>
+              
+              <div className="border-l-2 border-secondary pl-6 pb-6">
+                <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-2">
+                  <h3 className="text-xl font-semibold">Client Manager</h3>
+                  <span className="italic text-sm text-neutral-500 mt-1 md:mt-0">Student Union, Truman State University</span>
+                </div>
+                <p className="text-sm text-neutral-400 mb-2">August 2023 - May 2025</p>
+                <p className="text-neutral-400 max-w-xl text-sm font-semibold tracking-[0.12em]">
+                  Managed client relationships and ensured timely delivery of services.
+                </p>
+              </div>
+              
+              <div className="border-l-2 border-secondary pl-6">
+                <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-2">
+                  <h3 className="text-xl font-semibold">Computer Vision Research Intern</h3>
+                  <span className="italic text-sm text-neutral-500 mt-1 md:mt-0">School of Industrial Engineering, Purdue University</span>
+                </div>
+                <p className="text-sm text-neutral-400 mb-2">May 2023 - August 2023</p>
+                <p className="text-neutral-400 max-w-xl text-sm font-semibold tracking-[0.12em]">
+                Developed a computer vision system using Python and OpenCV to identify unsafe conditions and reduce workplace injury risk. 
+                Translated research objectives into working code and validated results with real data.
+                </p>
               </div>
             </div>
           </section>
 
           {/* Projects */}
           <section id="projects" className="py-24">
-            <h2 className="text-3xl font-bold mb-6">Projects & Work</h2>
+            <h2 className="text-3xl font-bold mb-6 text-secondary">Selected Projects</h2>
             <div className="grid md:grid-cols-2 gap-8">
               <div className="p-6 border border-gray-800 rounded hover:border-secondary transition">
-                <h3 className="font-semibold mb-2">My Playlist</h3>
+                <h3 className="text-xl font-semibold mb-3">International Girls' Academy LMS</h3>
+                <p className="text-neutral-400 max-w-xl text-md font-semibold tracking-[0.05em] mb-2">Developed a learning management system for the International Girls' Academy using React, Node.js, and PostgreSQL.</p>
+                <div className="flex gap-3">
+                  <a href="https://www.theinternationalgirlsacademy.com/" className="text-secondary hover:underline text-sm font-semibold">View Project →</a>
+                  <a href="https://github.com/cfgtexas25/Team-37" className="text-gray-500 hover:text-secondary text-sm font-semibold">GitHub →</a>
+                </div>
+              </div>
+              <div className="p-6 border border-gray-800 rounded hover:border-secondary transition">
+                <h3 className="text-xl font-semibold mb-3">TickerStats</h3>
+                <p className="text-neutral-400 max-w-xl text-md font-semibold tracking-[0.05em] mb-2">Developed a stock market simulator using React, Node.js, and PostgreSQL.</p>
+                <div className="flex gap-3">
+                  <a href="https://tickerstats-1.onrender.com/" className="text-secondary hover:underline text-sm font-semibold">View Project →</a>
+                  <a href="https://github.com/geraldobuseh/tickerstats" className="text-gray-500 hover:text-secondary text-sm font-semibold">GitHub →</a>
+                </div>
+              </div>
+              <div className="p-6 border border-gray-800 rounded hover:border-secondary transition">
+                <h3 className="text-xl font-semibold mb-3">EaseAccess</h3>
+                <p className="text-neutral-400 max-w-xl text-md font-semibold tracking-[0.05em] mb-2">Developed a web application to help users find the best accessible routes to their destinations using Gemini API, React, Node.js, and PostgreSQL.</p>
+                <div className="flex gap-3">
+                  <a href="https://devpost.com/software/easeaccess" className="text-secondary hover:underline text-sm font-semibold">View Project →</a>
+                  <a href="https://github.com/geraldobuseh/Building-With-AI" className="text-gray-500 hover:text-secondary text-sm font-semibold">GitHub →</a>
+                </div>
+              </div>
+              <div className="p-6 border border-gray-800 rounded hover:border-secondary transition">
+                <h3 className="text-xl font-semibold mb-3">LiveWeather</h3>
+                <p className="text-neutral-400 max-w-xl text-md font-semibold tracking-[0.05em] mb-2">Developed a weather app using React, Node.js, and PostgreSQL.</p>
+                <div className="flex gap-3">
+                  <a href="https://geraldobuseh.github.io/weather-app/" className="text-secondary hover:underline text-sm font-semibold">View Project →</a>
+                  <a href="https://github.com/geraldobuseh/weather-app" className="text-gray-500 hover:text-secondary text-sm font-semibold">GitHub →</a>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* Playlist */}
+          <section id="playlist" className="py-24">
+            <h2 className="text-3xl font-bold mb-6 text-secondary">Gerald's Playlist</h2>
+            <div className="max-w-xl">
+              <p className="text-neutral-400 mb-4 font-light text-sm tracking-[0.09em]">
+                A personally curated selection of tracks I'm currently listening to                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+              </p>
+              <div className="border border-gray-800 rounded-lg p-6 hover:border-secondary transition">
                 <iframe
                   className="rounded w-full"
                   src="https://embed.music.apple.com/us/playlist/winter-25/pl.u-xlyNqJdIJ7dYpAM"
-                  height="200"
+                  height="500"
+                  allow="autoplay *; encrypted-media *;"
+                  frameBorder="0"
                 />
               </div>
-              <div className="p-6 border border-gray-800 rounded hover:border-secondary transition">
-                <h3 className="font-semibold mb-2">Trivia Game</h3>
-                <p className="text-gray-400">Fun interactive trivia quiz.</p>
-              </div>
+            </div>
+          </section>
+
+          {/* Trivia */}
+          <section id="trivia" className="py-24">
+            <h2 className="text-3xl font-bold mb-6 text-secondary">Trivia</h2>
+            <div className="max-w-2xl">
+              <TriviaQuiz />
             </div>
           </section>
 
           {/* Contact */}
           <section id="contact" className="py-24 text-center">
-            <h2 className="text-3xl font-bold mb-6">Get In Touch</h2>
+            <h2 className="text-3xl font-bold mb-6">Contact <span className="text-secondary">Me</span></h2>
             <p className="text-gray-400 mb-6">
-              I’m always open to discussing new opportunities, collaborations, or side projects.
+              Direct, intentional communication only.
             </p>
             <a
               href="mailto:geraldobuseh81@gmail.com"
-              className="inline-block border border-secondary text-secondary px-6 py-3 rounded hover:bg-secondary hover:text-black transition"
+              className="inline-block border border-secondary text-secondary px-6 py-3 rounded hover:bg-secondary hover:text-black transition font-semibold"
             >
-              Say Hello
+              Email Me
             </a>
           </section>
+          <p className="text-neutral-400 mt-5 font-semibold text-xs tracking-[0.25em] mx-auto text-center max-w-prose">Loosely designed by <span className="text-secondary">Gerald</span></p>
         </main>
       </div>
     </div>
+    </>
   );
 }
